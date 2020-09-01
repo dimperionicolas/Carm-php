@@ -1,8 +1,8 @@
-<?php include_once '../includes/funciones/funciones.php'; ?>
-<?php include_once '../includes/funciones/sesiones.php'; ?>
-<?php include_once '../includes/templates/header.php'; ?>
-<?php include_once '../includes/templates/aside.php'; ?>
-<?php include_once '../includes/templates/topbar.php'; ?>
+<?php include_once 'includes/funciones/funciones.php'; ?>
+<?php include_once 'includes/funciones/sesiones.php'; ?>
+<?php include_once 'includes/templates/header.php'; ?>
+<?php include_once 'includes/templates/aside.php'; ?>
+<?php include_once 'includes/templates/topbar.php'; ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

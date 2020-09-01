@@ -34,19 +34,19 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="ventas/listar-ventas.php" class="nav-link">
+              <a href="ventas.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Venta</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="compras/listar-compras.php" class="nav-link">
+              <a href="compras.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Compras</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="productos/listar-productos.php" class="nav-link">
+              <a href="inventario.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Inventario</p>
               </a>
@@ -67,13 +67,13 @@
 
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="admins/crear-admin.php" class="nav-link">
+                <a href="crear-admin.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Crear</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="admins/listar-admin.php" class="nav-link">
+                <a href="listar-admin.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Listar/Eliminar</p>
                 </a>
@@ -100,13 +100,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="proveedores/crear-vendedor.php" class="nav-link">
+              <a href="crear-vendedor.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Crear</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="proveedores/listar-vendedor.php" class="nav-link">
+              <a href="listar-vendedor.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Listar/Eliminar</p>
               </a>
@@ -123,13 +123,13 @@
 
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="clientes/crear-cliente.php" class="nav-link">
+              <a href="crear-cliente.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Crear</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="clientes/listar-cliente.php" class="nav-link">
+              <a href="listar-cliente.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Listar/Eliminar</p>
               </a>
