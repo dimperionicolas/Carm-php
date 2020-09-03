@@ -14,3 +14,6 @@ function revisar_usuario()
 
 session_start();
 usuario_autenticado();
+
+
+$base_path = '/AdCarmina';

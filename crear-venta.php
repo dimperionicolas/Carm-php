@@ -1,6 +1,6 @@
-<?php include_once 'includes/templates/header.php'; ?>
-<?php include_once 'includes/templates/aside.php'; ?>
-<?php include_once 'includes/templates/topbar.php'; ?>
+<?php include_once __ROOT__.'/includes/templates/header.php'; ?>
+<?php include_once __ROOT__.'/includes/templates/aside.php'; ?>
+<?php include_once __ROOT__.'/includes/templates/topbar.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -43,4 +43,4 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <?php include_once 'includes/templates/footer.php'; ?>
+    <?php include_once __ROOT__.'/includes/templates/footer.php'; ?>

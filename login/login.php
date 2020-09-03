@@ -1,4 +1,5 @@
-<?php include_once 'includes/templates/header.php'; ?>
+<?php define('__ROOT__',dirname(dirname(__FILE__))) ?>
+<?php include_once __ROOT__.'/includes/templates/header.php'; ?>
 <?php
 session_start();
 $cerrar_sesion = $_GET['cerrar_sesion'];
@@ -62,4 +63,4 @@ if ($cerrar_sesion) {
 <!-- /.login-box -->
 </div>
 
-<?php include_once 'includes/templates/footer.php'; ?>
+<?php include_once __ROOT__.'/includes/templates/footer.php'; ?>

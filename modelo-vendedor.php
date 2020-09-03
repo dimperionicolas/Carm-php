@@ -1,5 +1,5 @@
 <?php
-include_once "includes/funciones/funciones.php";
+include_once 'includes/funciones/funciones.php';
 $fantasia = $_POST['fantasia'];
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];

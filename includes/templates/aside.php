@@ -67,13 +67,13 @@
 
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="crear-admin.php" class="nav-link">
+                <a href="<?php echo $base_path ?>/administradores/crear-admin.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Crear</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="listar-admin.php" class="nav-link">
+                <a href="<?php echo $base_path ?>/administradores/listar-admin.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Listar/Eliminar</p>
                 </a>

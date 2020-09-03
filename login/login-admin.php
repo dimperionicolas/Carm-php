@@ -1,13 +1,14 @@
 <?php
-include_once "includes/funciones/funciones.php";
+define('__ROOT__',dirname(dirname(__FILE__)));
+include_once __ROOT__.'/includes/funciones/funciones.php';
 $usuario = $_POST['usuario'];
 $password = $_POST['password'];
 
 //loguear y verificar administrador
 if (isset($_POST['login-admin'])) {
     try {
-        // include_once "includes/funciones/funciones.php";
-        $stmt = $conn->prepare("SELECT * FROM administradores WHERE usuario = ?");
+        // include_once 'includes/funciones/funciones.php';
+        $stmt = $conn->prepare('SELECT * FROM administradores WHERE usuario = ?');
         $stmt->bind_param("s", $usuario);
         $stmt->execute();
         $stmt->bind_result($id_admin, $usuario_admin, $nombre_admin, $password_admin, $editado, $nivel);

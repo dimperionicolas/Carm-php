@@ -11,7 +11,7 @@
 // var_dump($_POST);
 // echo "</pre>";
 
-include_once "includes/funciones/funciones.php";
+include_once 'includes/funciones/funciones.php';
 $usuario = $_POST['usuario'];
 $nombre = $_POST['nombre'];
 $password = $_POST['password'];
