@@ -1,41 +1,27 @@
 <?php
-
-//Utilizo para saber si hay conexion
-// if ($conn->ping()) {
-//     echo 'conectado';
-// } else {
-//     echo 'no conectado';
-// }
-
-// echo "<pre>";
-// var_dump($_POST);
-// echo "</pre>";
-
+ define('__ROOT__',dirname(dirname(__FILE__)));
 include_once 'includes/funciones/funciones.php';
-$usuario = $_POST['usuario'];
+$fantasia = $_POST['fantasia'];
 $nombre = $_POST['nombre'];
-$password = $_POST['password'];
+$apellido = $_POST['apellido'];
+$direccion = $_POST['direccion'];
+$contacto = $_POST['contacto'];
+$social = $_POST['social'];
+
 $id_registro = $_POST['id_registro'];
 
 //Crear nuevo administrador
 if ($_POST['registro'] == 'nuevo') {
-    $opciones = array(
-        'cost' => 12
-    );
-
-    $password_hashed = password_hash($password, PASSWORD_BCRYPT, $opciones);
-
-
     try {
-        $stmt = $conn->prepare("INSERT INTO administradores (usuario,nombre,password,editado) VALUES (?,?,?,NOW())");
-        $stmt->bind_param("sss", $usuario, $nombre, $password_hashed);
+        $stmt = $conn->prepare("INSERT INTO vendedores (nombre_fantasia,nombre,apellido,direccion,contacto,social,fecha_agregado,editado) VALUES (?,?,?,?,?,?,NOW(),NOW())");
+        $stmt->bind_param("ssssis", $fantasia, $nombre, $apellido, $direccion, $contacto, $social);
         $stmt->execute();
         $id_registro = $stmt->insert_id;
 
         if ($id_registro > 0) {
             $response = array(
                 'respuesta' => 'exito',
-                'id_admin' => $id_registro
+                'id_vendedor' => $id_registro
             );
         } else {
             $response = array(
@@ -49,8 +35,7 @@ if ($_POST['registro'] == 'nuevo') {
             'respuesta' => 'Error: ' . $th->getMessage()
         );
     }
-    // TODO por que lo pone como die(json_encode($response); y le funciona?
-    echo json_encode($response);
+    die(json_encode($response));
 }
 
 //editar/actualizar administrador
@@ -121,5 +106,3 @@ if ($_POST['registro'] == 'eliminar') {
     }
     die(json_encode($response));
 }
-
-

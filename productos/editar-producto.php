@@ -1,3 +1,4 @@
+<?php define('__ROOT__',dirname(dirname(__FILE__))) ?>
 <?php include_once __ROOT__.'/includes/templates/header.php'; ?>
 <?php include_once __ROOT__.'/includes/templates/aside.php'; ?>
 <?php include_once __ROOT__.'/includes/templates/topbar.php'; ?>
@@ -10,14 +11,13 @@
           
         </div><!-- /.container-fluid -->
       </section>
-
       <!-- Main content -->
       <section class="content">
 
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Ventas</h3>
+            <h3 class="card-title">Inventario</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
