@@ -37,18 +37,15 @@
 <?php
 $archivo = basename($_SERVER["PHP_SELF"]);
 $pagina = str_replace(".php", "", $archivo);
-if ($pagina == 'crear-admin') {
+if (preg_match('/(listar|crear|editar)-admin/',$pagina)) {
+  echo "<script> console.log('entro en admin');</script>";
   echo '<script src="'.$base_path.'/js/admin-ajax.js"></script>';
-} else if ($pagina == 'crear-vendedor') {
+} else if (preg_match('/(listar|crear|editar)-vendedor/',$pagina)) {
+  echo "<script> console.log('entro en vendedor footer');</script>";
   echo '<script src="'.$base_path.'/js/vendedor-ajax.js"></script>';
 }
 
 ?>
-
-<!-- 
-  <script src="<?php echo $base_path ?>/js/admin-ajax.js"></script>
-<script src="<?php echo $base_path ?>/js/vendedor-ajax.js"></script> 
--->
 
 <script src="<?php echo $base_path ?>/js/app.js"></script>
 

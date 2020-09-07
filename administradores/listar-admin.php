@@ -1,9 +1,9 @@
-<?php define('__ROOT__',dirname(dirname(__FILE__))) ?>
-<?php include_once __ROOT__.'/includes/funciones/funciones.php'; ?>
-<?php include_once __ROOT__.'/includes/funciones/sesiones.php'; ?>
-<?php include_once __ROOT__.'/includes/templates/header.php'; ?>
-<?php include_once __ROOT__.'/includes/templates/aside.php'; ?>
-<?php include_once __ROOT__.'/includes/templates/topbar.php'; ?>
+<?php define('__ROOT__', dirname(dirname(__FILE__))) ?>
+<?php include_once __ROOT__ . '/includes/funciones/funciones.php'; ?>
+<?php include_once __ROOT__ . '/includes/funciones/sesiones.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/header.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/aside.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/topbar.php'; ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -82,4 +82,4 @@
 </div>
 <!-- /.content-wrapper -->
 
-<?php include_once __ROOT__.'/includes/templates/footer.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/footer.php'; ?>

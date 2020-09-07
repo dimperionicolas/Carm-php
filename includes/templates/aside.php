@@ -56,7 +56,7 @@
 
         <li class="nav-header">Otros</li>
 
-
+        <!-- Administradores -->
         <?php if ($_SESSION['nivel'] == 1) { ?>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -92,6 +92,7 @@
               </a>
             </li> -->
 
+        <!-- Vendedores -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
@@ -100,13 +101,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="crear-vendedor.php" class="nav-link">
+              <a href="<?php echo $base_path ?>/vendedores/crear-vendedor.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Crear</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="listar-vendedor.php" class="nav-link">
+              <a href="<?php echo $base_path ?>/vendedores/listar-vendedor.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Listar/Eliminar</p>
               </a>

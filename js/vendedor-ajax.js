@@ -1,11 +1,9 @@
 $(document).ready(function () {
-    console.log('vendedor-ajax.js');
-    //Editar y crear administradores    
+    //Editar y crear vendedores    
     $('#guardar-registro').on('submit', function (e) {
         e.preventDefault();
         var datos = $(this).serializeArray();
         console.log(datos);
-        console.log('Datos a enviar' + datos);
         $.ajax({
             type: $(this).attr('method'),
             data: datos,
@@ -13,7 +11,6 @@ $(document).ready(function () {
             dataType: 'JSON',
             success: function (data) {
                 var resultado = data;
-                console.log('Esto es data')
                 console.log(resultado)
                 if (resultado.respuesta == 'exito') {
                     Swal.fire(
@@ -34,13 +31,12 @@ $(document).ready(function () {
         })
     });
     
-    //Eliminar administrador    
+    //Eliminar vendedor    
     $('.borrar_registro').on('click', function (e) {
         e.preventDefault();
-
+        
         var id = $(this).attr('data-id');
         var tipo = $(this).attr('data-tipo');
-        console.log(tipo)
         Swal.fire({
             title: '¿Estas seguro?',
             text: "Esta operación no se puede revertir!",
@@ -61,7 +57,6 @@ $(document).ready(function () {
                     url: 'modelo-' + tipo + '.php',
 
                     success: function (data) {
-                        console.log(data)
                         var resultado = JSON.parse(data);
                         if (resultado.respuesta == 'exito') {
                             Swal.fire(

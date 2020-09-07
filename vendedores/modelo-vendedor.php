@@ -1,20 +1,21 @@
 <?php
- define('__ROOT__',dirname(dirname(__FILE__)));
-include_once 'includes/funciones/funciones.php';
+define('__ROOT__', dirname(dirname(__FILE__)));
+include_once __ROOT__.'/includes/funciones/funciones.php';
 $fantasia = $_POST['fantasia'];
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $direccion = $_POST['direccion'];
 $contacto = $_POST['contacto'];
-$social = $_POST['social'];
+$social = $_POST['red_social'];
 
 $id_registro = $_POST['id_registro'];
 
-//Crear nuevo administrador
+
+//Crear nuevo vendedor
 if ($_POST['registro'] == 'nuevo') {
     try {
-        $stmt = $conn->prepare("INSERT INTO vendedores (nombre_fantasia,nombre,apellido,direccion,contacto,social,fecha_agregado,editado) VALUES (?,?,?,?,?,?,NOW(),NOW())");
-        $stmt->bind_param("ssssis", $fantasia, $nombre, $apellido, $direccion, $contacto, $social);
+        $stmt = $conn->prepare("INSERT INTO vendedores (nombre_fantasia, nombre, apellido, direccion, contacto, social, fecha_agregado, editado) VALUES (?,?,?,?,?,?,NOW(),NOW())");
+        $stmt->bind_param("ssssss", $fantasia, $nombre, $apellido, $direccion, $contacto, $social);
         $stmt->execute();
         $id_registro = $stmt->insert_id;
 
@@ -35,27 +36,14 @@ if ($_POST['registro'] == 'nuevo') {
             'respuesta' => 'Error: ' . $th->getMessage()
         );
     }
-    die(json_encode($response));
+    echo json_encode($response);
 }
 
-//editar/actualizar administrador
+//editar/actualizar vendedor
 if ($_POST['registro'] == 'actualizar') {
-
-    if (empty($_POST['password'])) {
-        $stmt = $conn->prepare("UPDATE administradores SET usuario = ?, nombre = ?, editado = NOW() WHERE id_admin = ?");
-        $stmt->bind_param("ssi", $usuario, $nombre, $id_registro);
-    } else {
-        $opciones = array(
-            'cost' => 12
-        );
-
-        $password_hashed = password_hash($password, PASSWORD_BCRYPT, $opciones);
-
-        $stmt = $conn->prepare("UPDATE administradores SET usuario = ?, nombre = ?,password = ?, editado = NOW() WHERE id_admin = ?");
-        $stmt->bind_param("sssi", $usuario, $nombre, $password_hashed, $id_registro);
-    }
-
     try {
+        $stmt = $conn->prepare("UPDATE vendedores SET nombre_fantasia = ?, nombre = ?, apellido = ?, direccion = ?, contacto = ?, social = ?, editado = NOW() WHERE id_vendedor = ?");
+        $stmt->bind_param("ssssssi", $fantasia, $nombre, $apellido, $direccio, $contacto, $social, $id_registro);
         $stmt->execute();
         $id_registro = $stmt->insert_id;
 
@@ -79,12 +67,12 @@ if ($_POST['registro'] == 'actualizar') {
 }
 
 
-//elimina administrador
+//elimina vendedor
 if ($_POST['registro'] == 'eliminar') {
     $id_borrar = $_POST['id'];
     try {
 
-        $stmt = $conn->prepare("DELETE FROM administradores WHERE id_admin = ?");
+        $stmt = $conn->prepare("DELETE FROM vendedores WHERE id_vendedor = ?");
         $stmt->bind_param("i", $id_borrar);
 
         $stmt->execute();

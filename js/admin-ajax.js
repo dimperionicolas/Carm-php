@@ -33,6 +33,7 @@ $(document).ready(function () {
     //Eliminar administrador    
     $('.borrar_registro').on('click', function (e) {
         e.preventDefault();
+        console.log("click");
 
         var id = $(this).attr('data-id');
         var tipo = $(this).attr('data-tipo');

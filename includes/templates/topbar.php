@@ -26,7 +26,7 @@
 
    <!-- Right navbar links -->
    <ul class="navbar-nav ml-auto">
-     <a class="nav-link" href="login.php?cerrar_sesion=true">Cerrar Sesion</a>
+     <a class="nav-link" href="<?php echo $base_path ?>/login/login.php?cerrar_sesion=true">Cerrar Sesion</a>
    </ul>
  </nav>
  <!-- /.navbar -->

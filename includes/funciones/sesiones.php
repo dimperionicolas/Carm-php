@@ -1,9 +1,10 @@
 <?php
-
+include_once __ROOT__.'/includes/funciones/config.php';
 function usuario_autenticado()
 {
+    global $base_path;
     if (!revisar_usuario()) {
-        header('Location:login.php');
+        header('Location:'.$base_path.'/login/login.php');
         exit();
     }
 }
@@ -16,4 +17,3 @@ session_start();
 usuario_autenticado();
 
 
-$base_path = '/AdCarmina';

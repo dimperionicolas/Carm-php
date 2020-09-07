@@ -17,7 +17,7 @@ $(document).ready(function () {
                         'success'
                     )
                     setTimeout(() => {
-                        window.location.href = 'index.php';
+                        window.location.href = '../index.php';
                     }, 2000);
                 }
                 else {

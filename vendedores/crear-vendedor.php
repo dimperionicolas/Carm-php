@@ -56,7 +56,6 @@
               <div class="form-group ">
                 <label for="red_social">Social: </label>
                 <input type="text" class="form-control" id="red_social" name="red_social" placeholder="Ingresar Instagram, Facebook o Web">
-                <!-- <span id="resultado_password" class="help-block"></span> -->
               </div>
 
             </div>
