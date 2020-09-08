@@ -1,9 +1,9 @@
-<?php define('__ROOT__',dirname(dirname(__FILE__))) ?>
-<?php include_once __ROOT__.'/includes/funciones/funciones.php'; ?>
-<?php include_once __ROOT__.'/includes/funciones/sesiones.php'; ?>
-<?php include_once __ROOT__.'/includes/templates/header.php'; ?>
-<?php include_once __ROOT__.'/includes/templates/aside.php'; ?>
-<?php include_once __ROOT__.'/includes/templates/topbar.php'; ?>
+<?php define('__ROOT__', dirname(dirname(__FILE__))) ?>
+<?php include_once __ROOT__ . '/includes/funciones/funciones.php'; ?>
+<?php include_once __ROOT__ . '/includes/funciones/sesiones.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/header.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/aside.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/topbar.php'; ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -22,7 +22,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Lista administradores</h3>
+              <h3 class="card-title">Lista clientes</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -31,6 +31,8 @@
                   <tr>
                     <th>Usuario</th>
                     <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Contacto</th>
                     <th>Acciones </th>
                   </tr>
                 </thead>
@@ -38,21 +40,23 @@
                   <?php
 
                   try {
-                    $sql = "SELECT id_admin, usuario, nombre FROM administradores";
+                    $sql = 'SELECT id_cliente, nombre, apellido, direccion, contacto FROM clientes';
                     $resultado = $conn->query($sql);
                   } catch (Exception $th) {
                     echo 'Error: ' . $th->getMessage();
                   }
-                  while ($admin = $resultado->fetch_assoc()) { ?>
+                  while ($cliente = $resultado->fetch_assoc()) { ?>
                     <tr>
 
-                      <td><?php echo $admin['usuario']; ?></td>
-                      <td><?php echo $admin['nombre']; ?></td>
+                      <td><?php echo $cliente['nombre']; ?></td>
+                      <td><?php echo $cliente['apellido']; ?></td>
+                      <td><?php echo $cliente['direccion']; ?></td>
+                      <td><?php echo $cliente['contacto']; ?></td>
                       <td>
-                        <a href="editar-admin.php?id=<?php echo $admin['id_admin']; ?>" class="btn btn-sm btn-warning">
+                        <a href="editar-cliente.php?id=<?php echo $cliente['id_cliente']; ?>" class="btn btn-sm btn-warning">
                           <i class="fas fa-pen-square"></i>
                         </a>
-                        <a href="#" data-id="<?php echo $admin['id_admin']; ?>" data-tipo="admin" class="btn btn-sm btn-danger borrar_registro">
+                        <a href="#" data-id="<?php echo $cliente['id_cliente']; ?>" data-tipo="cliente" class="btn btn-sm btn-danger borrar_registro">
                           <i class="fas fa-trash"></i>
                         </a>
                       </td>
@@ -63,7 +67,9 @@
                   <tr>
                     <th>Usuario</th>
                     <th>Nombre</th>
-                    <th>Acciones</th>
+                    <th>Direccion</th>
+                    <th>Contacto</th>
+                    <th>Acciones </th>
                   </tr>
                 </tfoot>
               </table>
@@ -82,4 +88,4 @@
 </div>
 <!-- /.content-wrapper -->
 
-<?php include_once __ROOT__.'/includes/templates/footer.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/footer.php'; ?>

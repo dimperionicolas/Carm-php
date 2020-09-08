@@ -46,3 +46,7 @@
     <!-- /.content-wrapper -->
 
     <?php include_once __ROOT__.'/includes/templates/footer.php'; ?>
+<!-- TODO crear confirmacion por parte de admin para eliminar entradas
+o un historial de cambios
+o un pendiente para revision
+ -->

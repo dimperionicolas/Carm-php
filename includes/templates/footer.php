@@ -31,7 +31,9 @@
 <script src="<?php echo $base_path ?>/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo $base_path ?>/js/responsive.bootstrap4.min.js"></script>
 <script src="<?php echo $base_path ?>/js/login-ajax.js"></script>
-
+<script>  
+console.log('se esta cargando el footer');
+</script>
 
 <!-- En base a que pagina apunta, carga uno u otro archivo -->
 <?php

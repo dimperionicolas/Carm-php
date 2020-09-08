@@ -34,19 +34,19 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="ventas.php" class="nav-link">
+              <a href="<?php echo $base_path ?>/ventas/crear-venta.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Venta</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="compras.php" class="nav-link">
+              <a href="<?php echo $base_path ?>/compras/crear-compra.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Compras</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="inventario.php" class="nav-link">
+              <a href="<?php echo $base_path ?>/productos/crear-producto.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Inventario</p>
               </a>
@@ -139,6 +139,32 @@
           </ul>
         </li>
 
+        <!-- productos -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Productos <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?php echo $base_path ?>/productos/crear-producto.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Crear</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo $base_path ?>/productos/listar-producto.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listar/Eliminar</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+        <!-- historial -->
         <li class="nav-item">
           <a href="historial.php" class="nav-link">
             <i class="far fa-circle nav-icon"></i>

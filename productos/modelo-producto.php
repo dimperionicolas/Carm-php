@@ -1,42 +1,25 @@
+<?php define('__ROOT__', dirname(dirname(__FILE__))) ?>
 <?php
-define('__ROOT__',dirname(dirname(__FILE__)));
-
-//Utilizo para saber si hay conexion
-// if ($conn->ping()) {
-//     echo 'conectado';
-// } else {
-//     echo 'no conectado';
-// }
-
-// echo "<pre>";
-// var_dump($_POST);
-// echo "</pre>";
-
-include_once 'includes/funciones/funciones.php';
-$usuario = $_POST['usuario'];
+include_once __ROOT__ . '/includes/funciones/funciones.php';
 $nombre = $_POST['nombre'];
-$password = $_POST['password'];
+$apellido = $_POST['apellido'];
+$direccion = $_POST['direccion'];
+$contacto = $_POST['contacto'];
 $id_registro = $_POST['id_registro'];
 
-//Crear nuevo administrador
+//Crear nuevo producto
 if ($_POST['registro'] == 'nuevo') {
-    $opciones = array(
-        'cost' => 12
-    );
-
-    $password_hashed = password_hash($password, PASSWORD_BCRYPT, $opciones);
-
 
     try {
-        $stmt = $conn->prepare("INSERT INTO administradores (usuario,nombre,password,editado) VALUES (?,?,?,NOW())");
-        $stmt->bind_param("sss", $usuario, $nombre, $password_hashed);
+        $stmt = $conn->prepare('INSERT INTO clientes (nombre, apellido, direccion, contacto, fecha_agregado, editado) VALUES (?,?,?,?,NOW(),NOW())');
+        $stmt->bind_param("ssss", $nombre, $apellido, $direccion, $contacto);
         $stmt->execute();
         $id_registro = $stmt->insert_id;
 
         if ($id_registro > 0) {
             $response = array(
                 'respuesta' => 'exito',
-                'id_admin' => $id_registro
+                'id_vendedor' => $id_registro
             );
         } else {
             $response = array(
@@ -50,28 +33,14 @@ if ($_POST['registro'] == 'nuevo') {
             'respuesta' => 'Error: ' . $th->getMessage()
         );
     }
-    // TODO por que lo pone como die(json_encode($response); y le funciona?
     echo json_encode($response);
 }
 
-//editar/actualizar administrador
+//editar/actualizar cliente
 if ($_POST['registro'] == 'actualizar') {
-
-    if (empty($_POST['password'])) {
-        $stmt = $conn->prepare("UPDATE administradores SET usuario = ?, nombre = ?, editado = NOW() WHERE id_admin = ?");
-        $stmt->bind_param("ssi", $usuario, $nombre, $id_registro);
-    } else {
-        $opciones = array(
-            'cost' => 12
-        );
-
-        $password_hashed = password_hash($password, PASSWORD_BCRYPT, $opciones);
-
-        $stmt = $conn->prepare("UPDATE administradores SET usuario = ?, nombre = ?,password = ?, editado = NOW() WHERE id_admin = ?");
-        $stmt->bind_param("sssi", $usuario, $nombre, $password_hashed, $id_registro);
-    }
-
     try {
+        $stmt = $conn->prepare("UPDATE clientes SET nombre = ?, apellido = ?, direccion = ?, contacto = ?, editado = NOW() WHERE id_cliente = ?");
+        $stmt->bind_param("sssss", $nombre, $apellido, $direccion, $contacto, $id_registro);
         $stmt->execute();
         $id_registro = $stmt->insert_id;
 
@@ -95,12 +64,12 @@ if ($_POST['registro'] == 'actualizar') {
 }
 
 
-//elimina administrador
+//elimina cliente
 if ($_POST['registro'] == 'eliminar') {
     $id_borrar = $_POST['id'];
     try {
 
-        $stmt = $conn->prepare("DELETE FROM administradores WHERE id_admin = ?");
+        $stmt = $conn->prepare("DELETE FROM clientes WHERE id_cliente = ?");
         $stmt->bind_param("i", $id_borrar);
 
         $stmt->execute();
@@ -122,5 +91,3 @@ if ($_POST['registro'] == 'eliminar') {
     }
     die(json_encode($response));
 }
-
-
