@@ -115,6 +115,7 @@
           </ul>
         </li>
 
+        <!-- clientes -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
@@ -124,13 +125,13 @@
 
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="crear-cliente.php" class="nav-link">
+              <a href="<?php echo $base_path ?>/clientes/crear-cliente.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Crear</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="listar-cliente.php" class="nav-link">
+              <a href="<?php echo $base_path ?>/clientes/listar-cliente.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Listar/Eliminar</p>
               </a>

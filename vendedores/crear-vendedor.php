@@ -66,6 +66,7 @@
 
       <div class="card-footer">
         <input type="hidden" name="registro" value="nuevo">
+        <!-- id="crear_vendedor" para agregar validaciones en app.js-->
         <button type="submit" class="btn btn-primary" id="crear_vendedor">Agregar</button>
       </div>
       </form>

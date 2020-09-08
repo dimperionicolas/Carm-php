@@ -43,6 +43,9 @@ if (preg_match('/(listar|crear|editar)-admin/',$pagina)) {
 } else if (preg_match('/(listar|crear|editar)-vendedor/',$pagina)) {
   echo "<script> console.log('entro en vendedor footer');</script>";
   echo '<script src="'.$base_path.'/js/vendedor-ajax.js"></script>';
+}else if (preg_match('/(listar|crear|editar)-cliente/',$pagina)) {
+  echo "<script> console.log('entro en cliente footer');</script>";
+  echo '<script src="'.$base_path.'/js/cliente-ajax.js"></script>';
 }
 
 ?>
