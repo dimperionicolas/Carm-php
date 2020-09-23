@@ -21,6 +21,10 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo $base_path ?>/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo $base_path ?>/css/responsive.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo $base_path ?>/css/adminlte.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="<?php echo $base_path ?>/css/toastr.min.css">
 
 </head>
 
@@ -29,5 +33,3 @@
 
   <!-- Site wrapper -->
   <div class="wrapper">
-
-

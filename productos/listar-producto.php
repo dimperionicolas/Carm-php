@@ -22,17 +22,16 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Lista clientes</h3>
+              <h3 class="card-title">Lista productos</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="registros" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Usuario</th>
-                    <th>Nombre</th>
-                    <th>Direccion</th>
-                    <th>Contacto</th>
+                    <th>Producto</th>
+                    <th>Comentario</th>
+                    <th>Vendedor</th>
                     <th>Acciones </th>
                   </tr>
                 </thead>
@@ -40,23 +39,22 @@
                   <?php
 
                   try {
-                    $sql = 'SELECT id_cliente, nombre, apellido, direccion, contacto FROM clientes';
+                    $sql = 'SELECT p.id_producto, p.descripcion, p.comentario, p.imagen, v.nombre_fantasia, v.nombre, v.apellido FROM productos AS p, vendedores as v WHERE v.id_vendedor = p.id_vendedor';
                     $resultado = $conn->query($sql);
                   } catch (Exception $th) {
                     echo 'Error: ' . $th->getMessage();
                   }
-                  while ($cliente = $resultado->fetch_assoc()) { ?>
+                  while ($producto = $resultado->fetch_assoc()) { ?>
                     <tr>
 
-                      <td><?php echo $cliente['nombre']; ?></td>
-                      <td><?php echo $cliente['apellido']; ?></td>
-                      <td><?php echo $cliente['direccion']; ?></td>
-                      <td><?php echo $cliente['contacto']; ?></td>
+                      <td><?php echo $producto['descripcion']; ?></td>
+                      <td><?php echo $producto['comentario']; ?></td>
+                      <td><?php echo $producto['nombre_fantasia'] . '' . $producto['nombre'] . ' ' . $producto['apellido'] ?></td>
                       <td>
-                        <a href="editar-cliente.php?id=<?php echo $cliente['id_cliente']; ?>" class="btn btn-sm btn-warning">
+                        <a href="editar-producto.php?id=<?php echo $producto['id_producto']; ?>" class="btn btn-sm btn-warning">
                           <i class="fas fa-pen-square"></i>
                         </a>
-                        <a href="#" data-id="<?php echo $cliente['id_cliente']; ?>" data-tipo="cliente" class="btn btn-sm btn-danger borrar_registro">
+                        <a href="#" data-id="<?php echo $producto['id_producto']; ?>" data-tipo="producto" class="btn btn-sm btn-danger borrar_registro">
                           <i class="fas fa-trash"></i>
                         </a>
                       </td>
@@ -65,10 +63,9 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Usuario</th>
-                    <th>Nombre</th>
-                    <th>Direccion</th>
-                    <th>Contacto</th>
+                    <th>Producto</th>
+                    <th>Comentario</th>
+                    <th>Vendedor</th>
                     <th>Acciones </th>
                   </tr>
                 </tfoot>

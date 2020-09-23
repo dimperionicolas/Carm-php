@@ -1,15 +1,9 @@
 $(document).ready(function () {
-    //Editar y crear cliente    
+    //Editar y crear producto    
     $('#guardar-registro').on('submit', function (e) {
         e.preventDefault();
         var datos = $(this).serializeArray();
-        console.log("editar");  
-
         console.log(datos);
-        console.log($(this).attr('method'));  
-        console.log($(this).attr('action'));  
-        console.log("editar");  
-
         $.ajax({
             type: $(this).attr('method'),
             data: datos,
@@ -17,28 +11,29 @@ $(document).ready(function () {
             dataType: 'JSON',
             success: function (data) {
                 var resultado = data;
-                console.log(resultado)
-                if (resultado.respuesta == 'exito') {
-                    Swal.fire(
-                        'Correcto!!',
-                        'Se guardó correctamente!',
-                        'success'
-                    )
-                }
-                else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!!',
-                        text: 'No se cargó el producto!',
-                    })
-                }
+                console.log(resultado);
+                // if (resultado.respuesta == 'exito') {
+                //     Swal.fire(
+                //         'Correcto!!',
+                //         'Se guardó correctamente!',
+                //         'success'
+                //     );
+                //     window.location.href = '../index.php';
+                // }
+                // else {
+                //     Swal.fire({
+                //         icon: 'error',
+                //         title: 'Error!!',
+                //         text: 'No se cargó el producto!',
+                //     })
+                // }
             }
 
         })
     });
+
     //Eliminar cliente    
     $('.borrar_registro').on('click', function (e) {
-        e.preventDefault();
         console.log("click");
 
         var id = $(this).attr('data-id');

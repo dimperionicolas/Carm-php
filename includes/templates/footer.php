@@ -31,6 +31,7 @@
 <script src="<?php echo $base_path ?>/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo $base_path ?>/js/responsive.bootstrap4.min.js"></script>
 <script src="<?php echo $base_path ?>/js/login-ajax.js"></script>
+
 <script>  
 console.log('se esta cargando el footer');
 </script>
@@ -48,9 +49,15 @@ if (preg_match('/(listar|crear|editar)-admin/',$pagina)) {
 }else if (preg_match('/(listar|crear|editar)-cliente/',$pagina)) {
   echo "<script> console.log('entro en cliente footer');</script>";
   echo '<script src="'.$base_path.'/js/cliente-ajax.js"></script>';
+}else if (preg_match('/(listar|crear|editar)-producto/',$pagina)) {
+  echo "<script> console.log('entro en producto footer');</script>";
+  echo '<script src="'.$base_path.'/js/producto-ajax.js"></script>';
 }
 
 ?>
+<!-- TODO cargar solo en paginas con modal -->
+<!-- Toastr -->
+<!-- <script src="../../plugins/toastr/toastr.min.js"></script> -->
 
 <script src="<?php echo $base_path ?>/js/app.js"></script>
 

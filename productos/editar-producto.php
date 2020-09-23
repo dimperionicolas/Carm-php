@@ -32,38 +32,58 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h2 class="card-title">Editar cliente <small></small></h2>
+        <h2 class="card-title">Editar producto <small></small></h2>
       </div>
 
       <div class="row">
         <div class="col-md-8">
 
-          <form role="form" name="guardar-registro" id="guardar-registro" method="POST" action="modelo-cliente.php">
+          <form role="form" name="guardar-registro" id="guardar-registro" method="POST" action="modelo-producto.php">
             <?php
-            $sql = "SELECT * FROM clientes WHERE id_cliente = $id";
+            $sql = "SELECT * FROM productos WHERE id_producto = $id";
             $resultado = $conn->query($sql);
-            $admin = $resultado->fetch_assoc();
+            $producto = $resultado->fetch_assoc();
             ?>
             <div class="card-body">
-              <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresar nombre" value="<?php echo $admin['nombre'] ?>">
+            <div class="form-group">
+                <label for="descripcion">Descripción: </label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingresar descripcion" value="<?php echo $producto['descripcion'] ?>" >
+              </div>
+              
+              <div class="row">
+                <div class="col-sm-6">
+                  <!-- textarea -->
+                  <div class="form-group">
+                    <label for="comentario">Comentarios: </label>
+                    <textarea class="form-control" rows="3" name="comentario" placeholder="Añada un comentario..." ><?php echo $producto['comentario'] ?></textarea>
+                  </div>
+                </div>
               </div>
 
-              <div class="form-group">
-                <label for="apellido">Apellido: </label>
-                <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingresar un apellido" value="<?php echo $admin['apellido'] ?>">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Seleccione un vendedor</label>
+                  <select class="form-control" name="vendedor">
+                    <?php
+                    try {
+                      $sql = 'SELECT * FROM vendedores';
+                      $resultado = $conn->query($sql);
+                    } catch (\Throwable $th) {
+                      echo 'Error: ' . $th->getMessage();
+                    }
+                    while ($vendedor = $resultado->fetch_assoc()) {
+                      if ($vendedor['id_vendedor']==$producto['id_vendedor']) {
+                        echo '<option value='.$vendedor['id_vendedor'].' selected >' . $vendedor['nombre_fantasia'] . ' ' . $vendedor['nombre'] . '</option>';
+                      }
+                      echo '<option value='.$vendedor['id_vendedor'].'> ' . $vendedor['nombre_fantasia'] . ' ' . $vendedor['nombre'] . '</option>';
+                    }
+                    ?>
+                  </select>
+                  <a href="<?php echo $base_path ?>/vendedores/crear-vendedor.php" class="nav-link">Nuevo vendedor</a>
+                </div>
+                <!-- select -->
               </div>
 
-              <div class="form-group">
-                <label for="direccion">Direccion: </label>
-                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresar un direccion" value="<?php echo $admin['direccion'] ?>">
-              </div>
-
-              <div class="form-group">
-                <label for="contacto">Contacto: </label>
-                <input type="text" class="form-control" id="contacto" name="contacto" placeholder="Ingresar un contacto" value="<?php echo $admin['contacto'] ?>">
-              </div>
 
             </div>
             <!-- /.card-body -->
