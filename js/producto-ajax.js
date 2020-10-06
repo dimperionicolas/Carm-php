@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    //TODO limpiar todos los campos luego de succes en submit
+    //
+
+
     //Editar y crear producto    
     $('#guardar-registro').on('submit', function (e) {
         e.preventDefault();
@@ -11,22 +15,28 @@ $(document).ready(function () {
             dataType: 'JSON',
             success: function (data) {
                 var resultado = data;
-                console.log(resultado);
-                // if (resultado.respuesta == 'exito') {
-                //     Swal.fire(
-                //         'Correcto!!',
-                //         'Se guardó correctamente!',
-                //         'success'
-                //     );
-                //     window.location.href = '../index.php';
-                // }
-                // else {
-                //     Swal.fire({
-                //         icon: 'error',
-                //         title: 'Error!!',
-                //         text: 'No se cargó el producto!',
-                //     })
-                // }
+                console.log('Este es el resultado ' + resultado);
+                if (resultado.respuesta == 'exito' && resultado.stock == 'correcto') {
+                    Swal.fire(
+                        'Correcto!!',
+                        'Se guardó correctamente!',
+                        'success'
+                    );
+                }
+                else if (resultado.respuesta == 'exito' && resultado.stock != 'correcto') {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Advertencia!!',
+                        text: 'Producto creado! Falló la carga de stock!',
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!!',
+                        text: 'No se cargo el producto!',
+                    })
+                }
+
             }
 
         })
@@ -68,6 +78,12 @@ $(document).ready(function () {
                                 'success'
                             )
                             jQuery('[data-id="' + resultado.id_eliminado + '"]').parents('tr').remove();
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!!',
+                                text: 'No se borro el producto!',
+                            })
                         }
                     }
                 })

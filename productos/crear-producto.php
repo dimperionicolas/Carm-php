@@ -102,15 +102,15 @@
                       &nbsp;
                       &nbsp;
                       &nbsp;
-                      <input type="radio" id="calzado" name="rb-talle" value="calzado" class="custom-control-input">
+                      <input type="radio" id="calzado" name="rb_talle" value="calzado" class="custom-control-input">
                       <label class="custom-control-label" for="calzado">Calzado</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="ropa" name="rb-talle" value="ropa" class="custom-control-input">
+                      <input type="radio" id="ropa" name="rb_talle" value="ropa" class="custom-control-input">
                       <label class="custom-control-label" for="ropa">Ropa</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="indeterminado" name="rb-talle" value="indeterminado" class="custom-control-input" checked>
+                      <input type="radio" id="indeterminado" name="rb_talle" value="indeterminado" class="custom-control-input" checked>
                       <label class="custom-control-label" for="indeterminado">No detallar</label>
                     </div>
                   </div>

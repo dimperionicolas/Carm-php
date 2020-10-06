@@ -15,6 +15,7 @@
   </section>
 
 
+
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -26,11 +27,12 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="registros" class="table table-bordered table-striped">
+              <table id="registros" class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
                     <th>Producto</th>
-                    <th>Comentario</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
                     <th>Vendedor</th>
                     <th>Acciones </th>
                   </tr>
@@ -39,20 +41,20 @@
                   <?php
 
                   try {
-                    $sql = 'SELECT p.id_producto, p.descripcion, p.comentario, p.imagen, v.nombre_fantasia, v.nombre, v.apellido FROM productos AS p, vendedores as v WHERE v.id_vendedor = p.id_vendedor';
+                    $sql = 'SELECT p.id_producto, p.descripcion, p.comentario, SUM(s.cant), p.imagen, v.nombre_fantasia, v.nombre, v.apellido FROM productos AS p, vendedores as v, stock as s WHERE v.id_vendedor = p.id_vendedor AND p.id_producto = s.id_producto GROUP BY p.id_producto';
                     $resultado = $conn->query($sql);
                   } catch (Exception $th) {
                     echo 'Error: ' . $th->getMessage();
                   }
                   while ($producto = $resultado->fetch_assoc()) { ?>
                     <tr>
-
                       <td><?php echo $producto['descripcion']; ?></td>
                       <td><?php echo $producto['comentario']; ?></td>
+                      <td><?php echo $producto['SUM(s.cant)']; ?></td>
                       <td><?php echo $producto['nombre_fantasia'] . '' . $producto['nombre'] . ' ' . $producto['apellido'] ?></td>
                       <td>
                         <a href="editar-producto.php?id=<?php echo $producto['id_producto']; ?>" class="btn btn-sm btn-warning">
-                          <i class="fas fa-pen-square"></i>
+                          <i class="far fa-edit"></i>
                         </a>
                         <a href="#" data-id="<?php echo $producto['id_producto']; ?>" data-tipo="producto" class="btn btn-sm btn-danger borrar_registro">
                           <i class="fas fa-trash"></i>
@@ -64,7 +66,8 @@
                 <tfoot>
                   <tr>
                     <th>Producto</th>
-                    <th>Comentario</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
                     <th>Vendedor</th>
                     <th>Acciones </th>
                   </tr>

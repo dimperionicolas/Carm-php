@@ -26,41 +26,19 @@
                with font-awesome or any other icon font library -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Operaciones
-              <i class="right fas fa-angle-left"></i>
+            <i class="nav-icon fas fa-bars"></i>
+            <p>Menu</i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?php echo $base_path ?>/ventas/crear-venta.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Venta</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo $base_path ?>/compras/crear-compra.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Compras</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo $base_path ?>/productos/crear-producto.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Inventario</p>
-              </a>
-            </li>
-          </ul>
         </li>
 
-        <li class="nav-header">Otros</li>
+        <!-- TODO cargar icono para cada li -->
 
         <!-- Administradores -->
         <?php if ($_SESSION['nivel'] == 1) { ?>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-crown nav-icon"></i>
               <p>Administradores <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -82,20 +60,58 @@
           </li>
         <?php } ?>
 
-        <!-- <li class="nav-item">
-              <a href="calendario.php" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Calendario
-                  <span class="badge badge-info right"></span>
-                </p>
+        <!-- Ventas -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+          <i class="fas fa-hand-holding-usd nav-icon"></i>
+            <p>Ventas <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?php echo $base_path ?>/ventas/crear-venta.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Crear</p>
               </a>
-            </li> -->
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo $base_path ?>/ventas/listar-venta.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listar</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+        <!-- Gastos -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-file-invoice-dollar nav-icon"></i>
+            <p>Gastos <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?php echo $base_path ?>/gastos/crear-gasto.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Crear</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo $base_path ?>/gastos/listar-gasto.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listar</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
 
         <!-- Vendedores -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+            <i class="fas fa-store nav-icon"></i>
             <p>Vendedores <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -115,10 +131,12 @@
           </ul>
         </li>
 
+
+
         <!-- clientes -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+            <i class="fas fa-users nav-icon"></i>
             <p>Clientes <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -142,7 +160,7 @@
         <!-- productos -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+            <i class="fas fa-box-open nav-icon"></i>
             <p>Productos <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -166,8 +184,8 @@
 
         <!-- historial -->
         <li class="nav-item">
-          <a href="historial.php" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+          <a href="#" class="nav-link">
+            <i class="far fa-folder-open nav-icon"></i>
             <p>Ver historial movimientos</p>
           </a>
         </li>
@@ -177,5 +195,6 @@
     <!-- /.sidebar-menu -->
   </div>
   <!-- /.sidebar -->
+  <!-- TODO cuando se despliega otro li, cerrar los que esten abiertos -->
 
 </aside>

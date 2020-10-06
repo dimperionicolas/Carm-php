@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     //ver o eliminar
     // $('.sidebar-menu').tree()
 
@@ -58,19 +59,35 @@ $(document).ready(function () {
     // validar que exista algun nombre o apellido o fantasia
 
 
+    // Para listar producto
+    /****************************************************************************************************/
+    // <!-- TODO si borro registros la tabala tiene menos de diez entradas, si ordeno por columna, aparecen tr faltantes pero no funcionan. app.js no funciona en td no cargados con la pagina, agregar addEvent $(document).ready(function(){
+    //     addAEvent();
+
+    //     $.get("....", function(data){
+
+    //         $('.div').html(data.loquesea);
+    //         addAEvent();
+    //     });
+
+    // }); -->
+
+
+
+
+
 
     // Para crear producto
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // propone el valor sugerido al 40%
+    /****************************************************************************************************/
+    /** propone el valor sugerido al 40% */
     $('#precio').on('change', function () {
         var sugerido = this.value * 1.4;
         $('#sugerido').val(sugerido.toFixed(2));
     })
 
 
-    //oculta o muestra los divs de talles
-    $('input[type=radio][name="rb-talle"]').change(function () {
+    /** oculta o muestra los divs de talles */
+    $('input[type=radio][name="rb_talle"]').change(function () {
         console.log("click rbd");
         $('div#talles-calzado').hide();
         $('div#talles-ropa').hide();
@@ -81,14 +98,14 @@ $(document).ready(function () {
         }
     });
 
-    //agregar tr de talle-calzado al presionar icono
+    /** agregar tr de talle-calzado al presionar icono*/
     $(".agregar-fila").click(function () {
         console.log('click');
         var tr = "<tr><td><input type='number' name='st_calz[talle][]' placeholder='37'  class='talle-calzado col-sm-4'></td><td><input type='number' name='st_calz[cant][]' placeholder='1' min='0' class='cant-talle-calzado col-sm-4'></td><td><i class='fas fa-minus-circle remover-fila' style='cursor: pointer;'></i></td></tr>";
         $("#t-calzado").append(tr);
     });
 
-    //remueve fila si no es la ultima
+    /** remueve fila si no es la ultima */
     $(document).on('click', '.remover-fila', function (event) {
         if ($(this).closest('tr').index() == 0 && $(this).closest('tr').next().index() == -1) {
             alert("Defina los talles o selecciones no detallar");
@@ -97,10 +114,10 @@ $(document).ready(function () {
         }
     });
 
-    //TODO validar que no se envien talles iguales en varias filas
-    // al apretar submit debe verificar que si el radio button esta presionado valide talle unico
-
-
+    /** 
+     * TODO validar que no se envien talles iguales en varias filas
+     * al apretar submit debe verificar que si el radio button esta presionado valide talle unico
+    */
 
 });
 
