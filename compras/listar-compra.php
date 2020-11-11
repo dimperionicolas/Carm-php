@@ -23,65 +23,50 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Productos</h3>
+              <h3 class="card-title">Lista productos</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="registros" class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
+                    <th>Fecha compra</th>
                     <th>Producto</th>
-                    <th>Comentario</th>
                     <th>Cantidad</th>
+                    <th>Precio</th>
                     <th>Vendedor</th>
-                    <th>Acciones </th>
+                    <th>Total</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-
                   try {
-                    $sql = 'SELECT p.id_producto, p.descripcion, p.comentario, SUM(s.cant), p.imagen, v.nombre_fantasia, v.nombre, v.apellido FROM productos AS p, vendedores as v, stock as s WHERE v.id_vendedor = p.id_vendedor AND p.id_producto = s.id_producto GROUP BY p.id_producto';
+                    $sql = 'SELECT c.id_compra, c.fecha_compra, p.descripcion,dc.precio_compra,dc.cantidad, v.nombre_fantasia,v.nombre,v.apellido FROM compras c, detalle_compras dc, productos p, vendedores v WHERE c.id_compra = dc.id_compra and dc.id_producto = p.id_producto and v.id_vendedor = c.id_vendedor ORDER BY c.fecha_compra ASC';
                     $resultado = $conn->query($sql);
                   } catch (Exception $th) {
                     echo 'Error: ' . $th->getMessage();
                   }
-                  while ($producto = $resultado->fetch_assoc()) { ?>
+                  while ($res = $resultado->fetch_assoc()) { ?>
                     <tr>
-                      <td>
-                        <?php
-
-                        if ($producto['SUM(s.cant)'] > 0) {
-                          echo '<a href=' . $base_path . '/ventas/crear-venta.php?id=' . $producto['id_producto'] . '>' .  $producto['descripcion'] . '</a>';
-                        } else {
-                          echo $producto['descripcion'];
-                        }
-                        ?>
-
-                      </td>
-                      <td><?php echo $producto['comentario']; ?></td>
-                      <td><?php echo $producto['SUM(s.cant)']; ?></td>
-                      <td><?php echo $producto['nombre_fantasia'] . '' . $producto['nombre'] . ' ' . $producto['apellido'] ?></td>
-                      <td>
-                        <a href="editar-producto.php?id=<?php echo $producto['id_producto']; ?>" class="btn btn-sm btn-warning">
-                          <i class="fas fa-pen-square"></i>
-                        </a>
-                        <!-- <a href="#" data-id="
-                        /** <?php echo $producto['id_producto']; ?>*/
-                        " data-tipo="producto" class="btn btn-sm btn-danger borrar_registro">
-                          <i class="fas fa-trash"></i>
-                        </a> -->
-                      </td>
+                      <td><?php echo $res['fecha_compra']; ?></td>
+                      <td><?php echo $res['descripcion']; ?></td>
+                      <td><?php echo $res['cantidad']; ?></td>
+                      <td><?php echo $res['precio_compra']; ?></td>
+                      <td><?php echo $res['nombre_fantasia'] . '' . $res['nombre'] . ' ' . $res['apellido'] ?></td>
+                      <td><?php
+                          $total = floatval($res['precio_compra']) * intval($res['cantidad']);
+                          echo $total; ?></td>
                     </tr>
                   <?php }; ?>
                 </tbody>
                 <tfoot>
                   <tr>
+                    <th>Fecha compra</th>
                     <th>Producto</th>
-                    <th>Comentario</th>
                     <th>Cantidad</th>
+                    <th>Precio</th>
                     <th>Vendedor</th>
-                    <th>Acciones </th>
+                    <th>Total</th>
                   </tr>
                 </tfoot>
               </table>

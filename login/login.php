@@ -25,7 +25,7 @@ if ($cerrar_sesion) {
 
         <form role="form" name="login-admin" id="login-admin" method="POST" action="login-admin.php">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="usuario" placeholder="Usuario">
+            <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>

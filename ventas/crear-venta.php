@@ -20,69 +20,79 @@
     <div class="card">
 
       <div class="card-header">
-        <h2 class="card-title">Crear producto <small></small></h2>
+        <h2 class="card-title">Nueva venta <small></small></h2>
       </div>
 
       <div class="row">
         <div class="col-md-8">
 
-          <form role="form" name="guardar-registro" id="guardar-registro" method="POST" action="modelo-producto.php">
+          <form role="form" name="guardar-registro" id="guardar-registro" method="POST" action="modelo-venta.php">
 
             <div class="card-body">
               <div class="row">
                 <!-- Columna izquierda -->
                 <div class="col-md-6">
-
-
-                  <!-- Descripción -->
+                  <!-- Producto -->
                   <div class="form-group">
-                    <label for="descripcion">Descripción: </label>
-                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingresar un descripcion">
+                    <label for="descripcion">Producto: </label>
+                    <?php
+                    $id = $_GET['id'];
+                    if (!filter_var($id, FILTER_VALIDATE_INT)) {
+                      echo '<input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Seleccione un producto" disabled>';
+                    } else {
+                      try {
+                        $sql = "SELECT p.id_producto, p.descripcion, p.comentario, p.sugerido, SUM(s.cant) as 'cantidad', p.imagen FROM productos AS p,stock as s WHERE p.id_producto = s.id_producto AND p.id_producto = $id GROUP BY p.id_producto";
+                        $resultado = $conn->query($sql);
+                      } catch (Exception $th) {
+                        echo 'Error: ' . $th->getMessage();
+                      }
+                      if ($resultado) {
+                        $producto = $resultado->fetch_assoc();
+                        echo '<input type="text" class="form-control" id="descripcion" name="descripcion" disabled value="' . $producto['descripcion'] . '">';
+                      }
+                    };
+                    ?>
+                    <a href="<?php echo $base_path ?>/productos/listar-producto.php" class="nav-link"> Cambiar producto </a>
                   </div>
-
                   <!-- Comentarios -->
                   <div class="row">
                     <div class="col-sm-12">
                       <!-- textarea -->
                       <div class="form-group">
-                        <label for="comentario">Comentarios: </label>
-                        <textarea class="form-control" rows="3" name="comentario" placeholder="Añada un comentario..."></textarea>
+                        <label>Observación del producto: </label>
+                        <input type="text" class="form-control" value="<?php echo $producto['comentario']; ?>" disabled>
                       </div>
                     </div>
                   </div>
-
-
-                  <!-- select vendedor -->
+                  <!-- select cliente -->
                   <div class="form-group ">
-                    <label for="vendedor">Seleccione un vendedor:</label>
-                    <select class="form-control" name="vendedor">
+                    <label for="cliente">Seleccione un cliente:</label>
+                    <select class="form-control" name="cliente">
                       <?php
                       try {
-                        $sql = 'SELECT * FROM vendedores';
+                        $sql = 'SELECT * FROM clientes';
                         $resultado = $conn->query($sql);
                       } catch (Exception $th) {
                         echo 'Error: ' . $th->getMessage();
                       }
-                      while ($vendedor = $resultado->fetch_assoc()) {
-                        echo '<option value=' . $vendedor['id_vendedor'] . '>' . $vendedor['nombre_fantasia'] . ' ' . $vendedor['nombre'] . '</option>';
+                      while ($cliente = $resultado->fetch_assoc()) {
+                        echo '<option value=' . $cliente['id_cliente'] . '>' . $cliente['nombre'] . ' ' . $cliente['apellido'] . '</option>';
                       }
                       ?>
                     </select>
-                    <a href="<?php echo $base_path ?>/vendedores/crear-vendedor.php" class="nav-link">Nuevo vendedor</a>
+                    <a href="<?php echo $base_path ?>/clientes/crear-cliente.php" class="nav-link">Nuevo cliente</a>
                   </div>
-
                   <!-- select Precio y sugerido-->
                   <div class="form-row">
                     <div class="form-group col-sm-6">
-                      <label for="precio">Precio: </label>
-                      <input type="number" class="form-control" id="precio" step="0.02" name="precio" placeholder="Costo de compra">
+                      <label for="sugerido">Sugerido <small>x Unidad</small>: </label>
+                      <input type="number" step="0.02" class="form-control" id="sugerido" name="sugerido" disabled value="<?php echo $producto['sugerido'] ?>">
                     </div>
                     <div class="form-group col-sm-6">
-                      <label for="sugerido">Sugerido <small>(40%)</small>: </label>
-                      <input type="number" step="0.02" class="form-control" id="sugerido" name="sugerido" placeholder="Precio sugerido">
+                      <label for="precio">Precio final <small>x Unidad</small>: </label>
+                      <input type="number" class="form-control" id="precio_venta" step="1" name="precio" value="<?php echo $producto['sugerido'] ?>">
                     </div>
                   </div>
-
                 </div>
 
                 <!-- Columna derecha -->
@@ -91,112 +101,99 @@
 
                   <!-- Cantidad stock -->
                   <div class="form-group">
-                    <label for="cantidad">Cantidad: </label>
-                    <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingresar un cantidad">
+                    <label for="cantidad">En stock: </label>
+                    <input type="number" class="form-control" id="cantidad" disabled value="<?php echo $producto['cantidad'] ?>">
+
                   </div>
 
-                  <!-- Radio buttons tipo talles-->
-                  <!-- TODO css padding left para div y sacar $nbsp; -->
-                  <div class="form-group">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      &nbsp;
-                      &nbsp;
-                      &nbsp;
-                      <input type="radio" id="calzado" name="rb_talle" value="calzado" class="custom-control-input">
-                      <label class="custom-control-label" for="calzado">Calzado</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="ropa" name="rb_talle" value="ropa" class="custom-control-input">
-                      <label class="custom-control-label" for="ropa">Ropa</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="indeterminado" name="rb_talle" value="indeterminado" class="custom-control-input" checked>
-                      <label class="custom-control-label" for="indeterminado">No detallar</label>
-                    </div>
-                  </div>
 
-                  <!-- div de talles calzado -->
-                  <div class="form-group text-center" id="talles-calzado" style="display: none;">
-                    <label>Talles<small class="text-bold">&nbsp;(Ingresar talle y cantidad)</small>: </label>
-                    <table id="t-calzado" class="table table-bordered table-sm table-striped table-hover table-responsive-sm col-sm-12">
-                      <thead>
-                        <tr>
-                          <th scope="col">Talle</th>
-                          <th scope="col">Cantidad</th>
-                          <th scope="col"><i class="fas fa-plus-circle agregar-fila" style="cursor: pointer;"></i></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <input type="number" name="st_calz[talle][]" placeholder="37" class="talle-calzado col-sm-4">
-                          </td>
-                          <td>
-                            <input type="number" name="st_calz[cant][]" placeholder="1" min="0" class="cant-talle-calzado col-sm-4">
-                          </td>
-                          <td><i class="fas fa-minus-circle remover-fila" style="cursor: pointer;"></i></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                  <?php
+                  $talles = array('xs', 's', 'm', 'l', 'xl', 'xxl');
+                  try {
+                    $sql = "SELECT talle, cant FROM stock WHERE id_producto = $id";
+                    $resultado = $conn->query($sql);
+                  } catch (Exception $th) {
+                    echo 'Error: ' . $th->getMessage();
+                  }
+                  if ($resultado) {
+                    $stock = $resultado->fetch_assoc();
 
-                  <!-- div de talles ropa -->
-                  <div class="form-group" id="talles-ropa" style="display: none;">
-                    <div class="form-group text-center">
-                      <label>Talles<small class="text-bold">&nbsp;(Ingresar talle y cantidad)</small>: </label>
-                      <table id="t-ropa" class="table table-bordered table-striped table-sm table-hover table-responsive-sm ">
-                        <thead>
-                          <tr>
-                            <th scope="col">Talle</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Talle</th>
-                            <th scope="col">Cantidad</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td scope="row">XS</td>
-                            <td>
-                              <input type="number" name="st_ropa[xs][]" placeholder="1" min="0" class="cant-talle-ropa col-sm-5">
-                            </td>
-                            <td scope="row">L</td>
-                            <td>
-                              <input type="number" name="st_ropa[l][]" placeholder="1" min="0" class="cant-talle-ropa col-sm-5">
-                            </td>
-                          </tr>
-                          <tr>
-                            <td scope="row">S</td>
-                            <td>
-                              <input type="number" name="st_ropa[s][]" placeholder="1" min="0" class="cant-talle-ropa col-sm-5">
-                            </td>
-                            <td scope="row">XL</td>
-                            <td>
-                              <input type="number" name="st_ropa[xl][]" placeholder="1" min="0" class="cant-talle-ropa col-sm-5">
-                            </td>
-                          </tr>
-                          <tr>
-                            <td scope="row">M</td>
-                            <td>
-                              <input type="number" name="st_ropa[m][]" placeholder="1" min="0" class="cant-talle-ropa col-sm-5">
-                            </td>
-                            <td scope="row">XXL</td>
-                            <td>
-                              <input type="number" name="st_ropa[xxl][]" placeholder="1" min="0" class="cant-talle-ropa col-sm-5">
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
+                    /**Si se trata de un entero seran  talles para calzado */
+                    if (filter_var($stock['talle'], FILTER_VALIDATE_INT)) {
+                      echo "
+                        <div class=\"form-group text-center\" id=\"talles-calzado\">
+                        <table id=\"t-calzado\" class=\"tabla-venta table table-bordered table-sm table-striped table-hover table-responsive-sm col-sm-12\">
+                          <thead>
+                            <tr>
+                              <th scope=\"col\">Talle</th>
+                              <th scope=\"col\">Cantidad</th>
+                              <th scope=\"col\">#</th>
+                            </tr>
+                          </thead>
+                          <tbody>";
+                      do {
+                        echo "<tr>
+                              <td>" . $stock['talle'] . "</td>
+                              <td>" . $stock['cant'] . "</td>
+                              <td class=\"w-25\"><input type=\"number\" name=\"cantidad[" . $stock['talle'] . "][]\" value=\"0\" class=\"w-75 cant\"></td>
+                            </tr>";
+                      } while ($stock = $resultado->fetch_assoc());
+                      echo "</tbody>
+                        </table>
+                      </div>";
 
+                      /**Si coincide con 'ind' seran talles unicos o no detallados */
+                    } elseif ($stock['talle'] == 'ind') {
+                      echo "<label>No hay detalle: </label>";
+                      echo "<label for=\"cantidad\">Cantidad: </label>";
+                      echo "<input type=\"number\" name=\"cantidad\" value=\"0\" class=\"cant tabla-venta form-control col-sm-3\">";
+
+                      /**Si se encuetran los talles dentro del array se trata de ropa*/
+                    } elseif (in_array($stock['talle'], $talles)) {
+                      echo "
+                      <div class=\"form-group\" id=\"talles-ropa\" >
+                          <div class=\"form-group text-center\">
+                            <table id=\"t-ropa\" class=\"tabla-venta table table-bordered table-striped table-sm table-hover table-responsive-sm \">
+                              <thead>
+                                <tr>
+                                  <th scope=\"col\">Talle</th>
+                                  <th scope=\"col\">Cantidad</th>                              
+                                  <th scope=\"col\">#</th>
+                                </tr>
+                              </thead>
+                              <tbody>";
+                      do {
+                        echo "<tr>
+                                      <td >" . $stock['talle'] . "</td>
+                                      <td >" . $stock['cant'] . "</td>
+                                      <td class=\"w-25\"><input type=\"number\" name=\"cantidad[" . $stock['talle'] . "][]\" value=\"0\" class=\"cant w-75\"></td>
+                                    </tr>";
+                      } while ($stock = $resultado->fetch_assoc());
+                      echo "
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      ";
+                    } else {
+                      echo "Sucedio algun error con los talles";
+                    }
+                  } else {
+                    echo "No se realizó la consulta";
+                  };
+                  ?>
                 </div>
               </div>
-
+              <div class="form-group">
+                <label for="Total">Total: </label>
+                <input type="number" class="form-control" disabled id="total">
+              </div>
               <!-- Submit -->
               <div class="card-footer text-right">
                 <input type="hidden" name="registro" value="nuevo">
+                <input type="hidden" name="id_producto" value="<?php echo $_GET['id'] ?>">
                 <!--TODO id="crear_cliente" para agregar validaciones en app.js-->
-                <button type="submit" class="btn btn-primary col-sm-12" id="crear_producto">Agregar</button>
+                <button type="submit" class="btn btn-primary col-sm-12" disabled id="crear_venta">Aceptar</button>
               </div>
             </div>
 

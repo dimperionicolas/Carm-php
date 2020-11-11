@@ -1,14 +1,25 @@
 $(document).ready(function () {
+
+    //Validacion
+    $('form').change(function (e) {
+        $('#crear_cliente').prop('disabled', true);
+        if (
+            (($('#apellido').val() != '') && ($('#apellido').val() != null)) || (($('#nombre').val() != '') && ($('#nombre').val() != null))) {
+            $('#crear_cliente').prop('disabled', false);
+        }
+    });
+
+
     //Editar y crear cliente    
     $('#guardar-registro').on('submit', function (e) {
         e.preventDefault();
         var datos = $(this).serializeArray();
-        console.log("editar");  
+        console.log("editar");
 
         console.log(datos);
-        console.log($(this).attr('method'));  
-        console.log($(this).attr('action'));  
-        console.log("editar");  
+        console.log($(this).attr('method'));
+        console.log($(this).attr('action'));
+        console.log("editar");
 
         $.ajax({
             type: $(this).attr('method'),
@@ -24,6 +35,10 @@ $(document).ready(function () {
                         'Se guardó correctamente!',
                         'success'
                     )
+                    setTimeout(() => {
+                        window.location.href = "/AdCarmina/clientes/listar-cliente.php";
+                    }, 1000);
+
                 }
                 else {
                     Swal.fire({

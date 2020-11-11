@@ -14,8 +14,6 @@
     </div><!-- /.container-fluid -->
   </section>
 
-
-
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -25,26 +23,49 @@
             <div class="card-header">
               <h3 class="card-title">Ventas realizadas</h3>
             </div>
+
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="registros" class="table table-bordered table-striped table-hover">
+              <table id="registros" class="tabla-ventas table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
-                    <th>Fecha</th>
+                    <th class="ordenamiento">Fecha</th>
+                    <th>Producto</th>
+                    <th>Talle</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
                     <th>Cliente</th>
-                    <th>Monto</th>
-                    <th>Detallar</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <!--SELECT ventas.id_venta, ventas.fecha_venta, clientes.id_cliente, clientes.nombre, clientes.apellido, detalle_ventas.cantidad, productos.descripcion FROM ventas, clientes, detalle_ventas, productos where ventas.id_venta = detalle_ventas.id_venta AND detalle_ventas.id_producto = productos.id_producto -->
+                  <?php
+                  try {
+                    $sql = "SELECT v.id_venta, dv.id_detalle, v.fecha_venta,dv.id_producto, dv.talle, dv.cantidad, dv.precio_venta, p.descripcion,c.nombre, c.apellido FROM ventas v,detalle_ventas dv, productos p, clientes c WHERE v.id_venta = dv.id_venta AND dv.id_producto = p.id_producto AND v.id_cliente = c.id_cliente ORDER BY v.fecha_venta DESC";
+                    $resultado = $conn->query($sql);
+                  } catch (Exception $th) {
+                    echo 'Error: ' . $th->getMessage();
+                  }
+                  while ($venta = $resultado->fetch_assoc()) {
+                  ?>
+                    <tr>
+                      <td><?php echo $venta['fecha_venta']; ?></td>
+                      <td><?php echo $venta['descripcion']; ?></td>
+                      <td><?php echo $venta['talle']; ?></td>
+                      <td><?php echo $venta['cantidad']; ?></td>
+                      <td><?php echo $venta['precio_venta']; ?></td>
+                      <td><?php echo $venta['nombre'] . " " . $venta['apellido']; ?></td>
+                    </tr>
+                  <?php } ?>
+
                 </tbody>
                 <tfoot>
                   <tr>
                     <th>Fecha</th>
+                    <th>Producto</th>
+                    <th>Talle</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
                     <th>Cliente</th>
-                    <th>Monto</th>
-                    <th>Detallar</th>
                   </tr>
                 </tfoot>
               </table>
@@ -62,5 +83,4 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
 <?php include_once __ROOT__ . '/includes/templates/footer.php'; ?>

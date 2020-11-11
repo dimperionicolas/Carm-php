@@ -32,28 +32,33 @@
 <script src="<?php echo $base_path ?>/js/responsive.bootstrap4.min.js"></script>
 <script src="<?php echo $base_path ?>/js/login-ajax.js"></script>
 
-<script>  
-console.log('se esta cargando el footer');
+<script>
+  console.log('se esta cargando el footer');
 </script>
 
 <!-- En base a que pagina apunta, carga uno u otro archivo -->
 <?php
 $archivo = basename($_SERVER["PHP_SELF"]);
 $pagina = str_replace(".php", "", $archivo);
-if (preg_match('/(listar|crear|editar)-admin/',$pagina)) {
+if (preg_match('/(listar|crear|editar)-admin/', $pagina)) {
   echo "<script> console.log('entro en admin');</script>";
-  echo '<script src="'.$base_path.'/js/admin-ajax.js"></script>';
-} else if (preg_match('/(listar|crear|editar)-vendedor/',$pagina)) {
+  echo '<script src="' . $base_path . '/js/admin-ajax.js"></script>';
+} else if (preg_match('/(listar|crear|editar)-vendedor/', $pagina)) {
   echo "<script> console.log('entro en vendedor footer');</script>";
-  echo '<script src="'.$base_path.'/js/vendedor-ajax.js"></script>';
-}else if (preg_match('/(listar|crear|editar)-cliente/',$pagina)) {
+  echo '<script src="' . $base_path . '/js/vendedor-ajax.js"></script>';
+} else if (preg_match('/(listar|crear|editar)-cliente/', $pagina)) {
   echo "<script> console.log('entro en cliente footer');</script>";
-  echo '<script src="'.$base_path.'/js/cliente-ajax.js"></script>';
-}else if (preg_match('/(listar|crear|editar)-producto/',$pagina)) {
+  echo '<script src="' . $base_path . '/js/cliente-ajax.js"></script>';
+} else if (preg_match('/(listar|crear|editar)-producto/', $pagina)) {
   echo "<script> console.log('entro en producto footer');</script>";
-  echo '<script src="'.$base_path.'/js/producto-ajax.js"></script>';
+  echo '<script src="' . $base_path . '/js/producto-ajax.js"></script>';
+} else if (preg_match('/(listar|crear|editar)-compra/', $pagina)) {
+  echo "<script> console.log('entro en producto footer');</script>";
+  echo '<script src="' . $base_path . '/js/compra-ajax.js"></script>';
+}else if (preg_match('/(listar|crear|editar)-venta/', $pagina)) {
+  echo "<script> console.log('entro en producto footer');</script>";
+  echo '<script src="' . $base_path . '/js/venta-ajax.js"></script>';
 }
-
 ?>
 <!-- TODO cargar solo en paginas con modal -->
 <!-- Toastr -->

@@ -63,20 +63,43 @@
         <!-- Ventas -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-          <i class="fas fa-hand-holding-usd nav-icon"></i>
+            <i class="fas fa-hand-holding-usd nav-icon"></i>
             <p>Ventas <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?php echo $base_path ?>/ventas/crear-venta.php" class="nav-link">
+              <a href="<?php echo $base_path ?>/productos/listar-producto.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Crear</p>
+                <p>Nueva venta</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo $base_path ?>/ventas/listar-venta.php" class="nav-link">
+                <i class="far fa-list-alt nav-icon"></i>
+                <p>Listar</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Compras -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-cart-plus nav-icon"></i>
+            <p>Compras <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?php echo $base_path ?>/compras/crear-compra.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
+                <p>Nueva compra</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo $base_path ?>/compras/listar-compra.php" class="nav-link">
+                <i class="far fa-list-alt nav-icon"></i>
                 <p>Listar</p>
               </a>
             </li>
@@ -85,7 +108,7 @@
 
 
         <!-- Gastos -->
-        <li class="nav-item has-treeview">
+        <!-- <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="fas fa-file-invoice-dollar nav-icon"></i>
             <p>Gastos <i class="right fas fa-angle-left"></i>
@@ -100,12 +123,12 @@
             </li>
             <li class="nav-item">
               <a href="<?php echo $base_path ?>/gastos/listar-gasto.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="far fa-list-alt nav-icon"></i>
                 <p>Listar</p>
               </a>
             </li>
           </ul>
-        </li>
+        </li> -->
 
 
         <!-- Vendedores -->
@@ -124,7 +147,7 @@
             </li>
             <li class="nav-item">
               <a href="<?php echo $base_path ?>/vendedores/listar-vendedor.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="far fa-list-alt nav-icon"></i>
                 <p>Listar/Eliminar</p>
               </a>
             </li>
@@ -150,7 +173,7 @@
             </li>
             <li class="nav-item">
               <a href="<?php echo $base_path ?>/clientes/listar-cliente.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="far fa-list-alt nav-icon"></i>
                 <p>Listar/Eliminar</p>
               </a>
             </li>
@@ -166,15 +189,10 @@
           </a>
 
           <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?php echo $base_path ?>/productos/crear-producto.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Crear</p>
-              </a>
-            </li>
+         
             <li class="nav-item">
               <a href="<?php echo $base_path ?>/productos/listar-producto.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="far fa-list-alt nav-icon"></i>
                 <p>Listar/Eliminar</p>
               </a>
             </li>

@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+
+
     //Editar y crear administradores    
     $('#guardar-registro').on('submit', function (e) {
         e.preventDefault();
@@ -18,6 +21,10 @@ $(document).ready(function () {
                         'Se guardó correctamente!',
                         'success'
                     )
+                    setTimeout(() => {
+                        window.location.href = "/AdCarmina/administradores/listar-admin.php";
+                    }, 1000);
+
                 }
                 else {
                     Swal.fire({

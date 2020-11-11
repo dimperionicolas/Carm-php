@@ -145,7 +145,7 @@
 
       <div class="card-footer row">
         <div class="col-lg-3 col-6">
-          <a href=" <?php echo $base_path ?>/ventas/crear-venta.php">Nueva venta</a>
+          <a href="<?php echo $base_path ?>/productos/listar-producto.php">Nueva venta</a>
         </div>
         <div class=" col-lg-3 col-6">
           <a href=" <?php echo $base_path ?>/compras/crear-compra.php">Nueva compra</a>

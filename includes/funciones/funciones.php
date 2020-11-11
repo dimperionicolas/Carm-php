@@ -11,7 +11,7 @@ set_error_handler(function (int $errno, string $errstr, string $errfile = null, 
 },   E_ALL ^ E_NOTICE);
 
 try {
-    $conn = new mysqli('localhost', 'root', 'root', 'CarminaDB', 3306);
+    $conn = new mysqli('localhost', 'root', 'root', 'carminadb', 3306);
 } catch (\Throwable $th) {
     die($th->getMessage());
 }

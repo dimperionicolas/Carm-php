@@ -1,8 +1,8 @@
-<?php define('__ROOT__',dirname(dirname(__FILE__))) ?>
-<?php include_once __ROOT__.'/includes/funciones/sesiones.php'; ?>
-<?php include_once __ROOT__.'/includes/templates/header.php'; ?>
-<?php include_once __ROOT__.'/includes/templates/aside.php'; ?>
-<?php include_once __ROOT__.'/includes/templates/topbar.php'; ?>
+<?php define('__ROOT__', dirname(dirname(__FILE__))) ?>
+<?php include_once __ROOT__ . '/includes/funciones/sesiones.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/header.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/aside.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/topbar.php'; ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -57,18 +57,18 @@
                 <label for="red_social">Social: </label>
                 <input type="text" class="form-control" id="red_social" name="red_social" placeholder="Ingresar Instagram, Facebook o Web">
               </div>
-
+              <div class="card-footer">
+                <input type="hidden" name="registro" value="nuevo">
+                <!-- id="crear_vendedor" para agregar validaciones en app.js-->
+                <button type="submit" class="btn btn-primary col-sm-12" id="crear_vendedor" disabled title="Agregar al menos un campo para identificarlo">Agregar</button>
+              </div>
             </div>
             <!-- /.card-body -->
 
         </div>
       </div>
 
-      <div class="card-footer">
-        <input type="hidden" name="registro" value="nuevo">
-        <!-- id="crear_vendedor" para agregar validaciones en app.js-->
-        <button type="submit" class="btn btn-primary" id="crear_vendedor">Agregar</button>
-      </div>
+
       </form>
 
 
@@ -80,4 +80,4 @@
 </div>
 <!-- /.content-wrapper -->
 
-<?php include_once __ROOT__.'/includes/templates/footer.php'; ?>
+<?php include_once __ROOT__ . '/includes/templates/footer.php'; ?>

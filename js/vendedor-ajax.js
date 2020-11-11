@@ -1,4 +1,16 @@
 $(document).ready(function () {
+
+
+    //Validacion
+    $('form').change(function (e) {
+        $('#crear_vendedor').prop('disabled', true);
+        if (
+            (($('#fantasia').val() != '') && ($('#fantasia').val() != null)) || (($('#apellido').val() != '') && ($('#apellido').val() != null)) || (($('#nombre').val() != '') && ($('#nombre').val() != null))) {
+            $('#crear_vendedor').prop('disabled', false);
+        }
+    });
+
+
     //Editar y crear vendedores    
     $('#guardar-registro').on('submit', function (e) {
         e.preventDefault();
@@ -18,6 +30,10 @@ $(document).ready(function () {
                         'Se guardó correctamente!',
                         'success'
                     )
+                    setTimeout(() => {
+                        window.location.href = "/AdCarmina/vendedores/listar-vendedor.php";
+                    }, 1000);
+
                 }
                 else {
                     Swal.fire({
@@ -30,11 +46,11 @@ $(document).ready(function () {
 
         })
     });
-    
+
     //Eliminar vendedor    
     $('.borrar_registro').on('click', function (e) {
         e.preventDefault();
-        
+
         var id = $(this).attr('data-id');
         var tipo = $(this).attr('data-tipo');
         Swal.fire({

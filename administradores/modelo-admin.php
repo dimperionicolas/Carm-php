@@ -1,16 +1,7 @@
 <?php define('__ROOT__',dirname(dirname(__FILE__))) ?>
 <?php
 
-//Utilizo para saber si hay conexion
-// if ($conn->ping()) {
-//     echo 'conectado';
-// } else {
-//     echo 'no conectado';
-// }
 
-// echo "<pre>";
-// var_dump($_POST);
-// echo "</pre>";
 
 include_once __ROOT__.'/includes/funciones/funciones.php';
 $usuario = $_POST['usuario'];
@@ -23,10 +14,7 @@ if ($_POST['registro'] == 'nuevo') {
     $opciones = array(
         'cost' => 12
     );
-
     $password_hashed = password_hash($password, PASSWORD_BCRYPT, $opciones);
-
-
     try {
         $stmt = $conn->prepare("INSERT INTO administradores (usuario,nombre,password,editado) VALUES (?,?,?,NOW())");
         $stmt->bind_param("sss", $usuario, $nombre, $password_hashed);
@@ -50,8 +38,7 @@ if ($_POST['registro'] == 'nuevo') {
             'respuesta' => 'Error: ' . $th->getMessage()
         );
     }
-    // TODO por que lo pone como die(json_encode($response); y le funciona?
-    echo json_encode($response);
+    die(json_encode($response));
 }
 
 //editar/actualizar administrador
@@ -90,8 +77,7 @@ if ($_POST['registro'] == 'actualizar') {
     } catch (Exception $th) {
         echo 'Error: ' . $th->getMessage();
     }
-    // TODO por que lo pone como die(json_encode($response); y le funciona?
-    echo json_encode($response);
+    die(json_encode($response));
 }
 
 

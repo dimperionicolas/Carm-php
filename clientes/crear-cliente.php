@@ -48,7 +48,11 @@
                 <label for="contacto">Contacto: </label>
                 <input type="contacto" class="form-control" id="contacto" name="contacto" placeholder="Ingresar un contacto">
               </div>
-
+              <div class="card-footer">
+                <input type="hidden" name="registro" value="nuevo">
+                <!-- TODO id="crear_cliente" para agregar validaciones en app.js-->
+                <button type="submit" class="btn btn-primary col-md-12" title="Agregar al menos un dato para identificarlo" disabled id="crear_cliente">Agregar</button>
+              </div>
 
             </div>
             <!-- /.card-body -->
@@ -56,11 +60,7 @@
         </div>
       </div>
 
-      <div class="card-footer">
-        <input type="hidden" name="registro" value="nuevo">
-        <!-- id="crear_cliente" para agregar validaciones en app.js-->
-        <button type="submit" class="btn btn-primary" id="crear_cliente">Agregar</button>
-      </div>
+
       </form>
 
 

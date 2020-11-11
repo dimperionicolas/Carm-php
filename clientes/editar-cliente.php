@@ -11,7 +11,6 @@
 $id = $_GET['id'];
 if (!filter_var($id, FILTER_VALIDATE_INT)) {
   //TODO redirigir si no ingresa un entero, 
-  //supuestamente el die deberia cancelar todo y anular la pagin
   die("Error!!");
 };
 ?>

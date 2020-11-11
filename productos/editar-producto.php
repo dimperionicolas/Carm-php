@@ -15,8 +15,7 @@ if (!filter_var($id, FILTER_VALIDATE_INT)) {
     die("Error!!");
 };
 try {
-    $sql = "SELECT p.descripcion,p.comentario,p.imagen,p.sugerido,v.nombre_fantasia,v.nombre,v.apellido FROM productos as p, vendedores as v WHERE p.id_vendedor = v.id_vendedor AND p.id_producto = $id";
-    
+    $sql = "SELECT p.*, SUM(s.cant) as 'cantidad', v.nombre_fantasia, v.nombre, v.apellido FROM productos p, stock s, vendedores v WHERE p.id_producto = s.id_producto AND p.id_producto = $id AND v.id_vendedor = p.id_vendedor";
     $resultado = $conn->query($sql);
 } catch (Exception $th) {
     echo 'Error: ' . $th->getMessage();
@@ -40,15 +39,14 @@ $producto = $resultado->fetch_assoc();
 
             <div class="card-header">
                 <h2 class="card-title">
-                    En construccion
-                    <!-- <?php echo $producto['descripcion'];  ?> -->
-                     <small></small></h2>
+                    <?php echo $producto['descripcion'];  ?>
+                    <small></small></h2>
             </div>
 
             <div class="row">
                 <div class="col-md-8">
-                   
-                    <form role="form" name="guardar-registro" id="guardar-registro" method="POST" action="modelo-producto.php">
+
+                    <form role="form" name="editar-registro" id="editar-registro" method="POST" action="modelo-producto.php">
 
                         <div class="card-body">
                             <div class="row">
@@ -59,7 +57,7 @@ $producto = $resultado->fetch_assoc();
                                     <!-- Descripción -->
                                     <div class="form-group">
                                         <label for="descripcion">Descripción: </label>
-                                        <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingresar un descripcion">
+                                        <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingresar un descripcion" value="<?php echo $producto['descripcion'];  ?>">
                                     </div>
 
                                     <!-- Comentarios -->
@@ -68,40 +66,31 @@ $producto = $resultado->fetch_assoc();
                                             <!-- textarea -->
                                             <div class="form-group">
                                                 <label for="comentario">Comentarios: </label>
-                                                <textarea class="form-control" rows="3" name="comentario" placeholder="Añada un comentario..."></textarea>
+                                                <textarea class="form-control" rows="3" name="comentario" placeholder="Añada un comentario..."><?php echo $producto['comentario'];  ?></textarea>
                                             </div>
                                         </div>
                                     </div>
 
-
                                     <!-- select vendedor -->
+                                    <!-- TODO deberia permitir cambiar el vendedor? -->
                                     <div class="form-group ">
                                         <label for="vendedor">Seleccione un vendedor:</label>
-                                        <select class="form-control" name="vendedor">
+                                        <select class="form-control" name="vendedor" disabled>
                                             <?php
-                                            try {
-                                                $sql = 'SELECT * FROM vendedores';
-                                                $resultado = $conn->query($sql);
-                                            } catch (Exception $th) {
-                                                echo 'Error: ' . $th->getMessage();
-                                            }
-                                            while ($vendedor = $resultado->fetch_assoc()) {
-                                                echo '<option value=' . $vendedor['id_vendedor'] . '>' . $vendedor['nombre_fantasia'] . ' ' . $vendedor['nombre'] . '</option>';
-                                            }
+                                            echo '<option value=' . $producto['id_vendedor'] . '>' . $producto['nombre_fantasia'] . ' ' . $producto['nombre'] . '</option>';
                                             ?>
                                         </select>
-                                        <a href="<?php echo $base_path ?>/vendedores/crear-vendedor.php" class="nav-link">Nuevo vendedor</a>
                                     </div>
-
                                     <!-- select Precio y sugerido-->
                                     <div class="form-row">
+                                        <!-- TODO deberia poner disable el precio de compra?  -->
                                         <div class="form-group col-sm-6">
                                             <label for="precio">Precio: </label>
-                                            <input type="number" class="form-control" id="precio" step="0.02" name="precio" placeholder="Costo de compra">
+                                            <input type="number" class="form-control" id="precio" step="0.02" name="precio" placeholder="Costo de compra" value="<?php echo $producto['precio'];  ?>">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="sugerido">Sugerido <small>(40%)</small>: </label>
-                                            <input type="number" step="0.02" class="form-control" id="sugerido" name="sugerido" placeholder="Precio sugerido">
+                                            <input type="number" step="0.02" class="form-control" id="sugerido" name="sugerido" placeholder="Precio sugerido" value="<?php echo $producto['sugerido'];  ?>">
                                         </div>
                                     </div>
 
@@ -110,20 +99,19 @@ $producto = $resultado->fetch_assoc();
                                 <!-- Columna derecha -->
                                 <div class="col-md-6">
 
-
                                     <!-- Cantidad stock -->
                                     <div class="form-group">
+                                        <!-- TODO para modificar la cantidad genero un boton de cambio junto con el stock -->
                                         <label for="cantidad">Cantidad: </label>
-                                        <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingresar un cantidad">
+                                        <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingresar un cantidad" value="<?php echo $producto['cantidad']; ?>" disabled>
                                     </div>
 
-                                    <!-- Radio buttons tipo talles-->
-                                    <!-- TODO css padding left para div y sacar $nbsp; -->
-                                    <div class="form-group">
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            &nbsp;
-                                            &nbsp;
-                                            &nbsp;
+                                    <!-- TODO verificar mediante PHP que tipo de talles utiliza, ind, calzado o ropa
+                                        Mostrar descripcion de talles disable y boton para editarlos 
+                                        Colocar foto para agregar-->
+                                    <!-- Radio buttons tipo talles -->
+                                    <!-- <div class="form-group">
+                                        <div class="custom-control custom-radio custom-control-inline ml-2">
                                             <input type="radio" id="calzado" name="rb_talle" value="calzado" class="custom-control-input">
                                             <label class="custom-control-label" for="calzado">Calzado</label>
                                         </div>
@@ -135,10 +123,9 @@ $producto = $resultado->fetch_assoc();
                                             <input type="radio" id="indeterminado" name="rb_talle" value="indeterminado" class="custom-control-input" checked>
                                             <label class="custom-control-label" for="indeterminado">No detallar</label>
                                         </div>
-                                    </div>
-
+                                    </div> -->
                                     <!-- div de talles calzado -->
-                                    <div class="form-group text-center" id="talles-calzado" style="display: none;">
+                                    <!-- <div class="form-group text-center" id="talles-calzado" style="display: none;">
                                         <label>Talles<small class="text-bold">&nbsp;(Ingresar talle y cantidad)</small>: </label>
                                         <table id="t-calzado" class="table table-bordered table-sm table-striped table-hover table-responsive-sm col-sm-12">
                                             <thead>
@@ -160,10 +147,9 @@ $producto = $resultado->fetch_assoc();
                                                 </tr>
                                             </tbody>
                                         </table>
-                                    </div>
-
+                                    </div> -->
                                     <!-- div de talles ropa -->
-                                    <div class="form-group" id="talles-ropa" style="display: none;">
+                                    <!-- <div class="form-group" id="talles-ropa" style="display: none;">
                                         <div class="form-group text-center">
                                             <label>Talles<small class="text-bold">&nbsp;(Ingresar talle y cantidad)</small>: </label>
                                             <table id="t-ropa" class="table table-bordered table-striped table-sm table-hover table-responsive-sm ">
@@ -209,16 +195,16 @@ $producto = $resultado->fetch_assoc();
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
-
+                                    </div> -->
                                 </div>
                             </div>
 
                             <!-- Submit -->
                             <div class="card-footer text-right">
-                                <input type="hidden" name="registro" value="nuevo">
+                                <input type="hidden" name="registro" value="actualizar">
+                                <input type="hidden" name="id_registro" value="<?php echo $id; ?>">
                                 <!--TODO id="crear_cliente" para agregar validaciones en app.js-->
-                                <button type="submit" class="btn btn-primary col-sm-12" id="crear_producto">Agregar</button>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
                             </div>
                         </div>
 

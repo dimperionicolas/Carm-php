@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+    $("#usuario").focus();
+
     $('#login-admin').on('submit', function (e) {
         e.preventDefault();
 
@@ -18,7 +21,7 @@ $(document).ready(function () {
                     )
                     setTimeout(() => {
                         window.location.href = '../index.php';
-                    }, 2000);
+                    }, 1000);
                 }
                 else {
                     Swal.fire({

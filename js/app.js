@@ -1,8 +1,5 @@
 $(document).ready(function () {
 
-    //ver o eliminar
-    // $('.sidebar-menu').tree()
-
     //configuracion datatable
     $('#registros').DataTable({
         "paging": true,
@@ -28,8 +25,6 @@ $(document).ready(function () {
     // TODO bloquea el boton si no valida, ver
     $('#crear_registro').attr('disabled', true);
 
-
-    //TODO utilizar css de admin ltd para errores
     // validacion para que coincidan los passwords
     $('#repetir_password').on('blur', function () {
 
@@ -46,38 +41,10 @@ $(document).ready(function () {
             $('#resultado_password').text('Los passwords con coinciden.');
             $('input#password').addClass('is-invalid').removeClass('is-valid');
             $('input#repetir_password').addClass('is-invalid').removeClass('is-valid');
-
         }
-
-
     });
 
-
-    // $('#crear-vendedor').attr('disabled', true);
-    // validar que contacto sea int 
-    // validar que exista alguna forma de conctacto 
-    // validar que exista algun nombre o apellido o fantasia
-
-
-    // Para listar producto
-    /****************************************************************************************************/
-    // <!-- TODO si borro registros la tabala tiene menos de diez entradas, si ordeno por columna, aparecen tr faltantes pero no funcionan. app.js no funciona en td no cargados con la pagina, agregar addEvent $(document).ready(function(){
-    //     addAEvent();
-
-    //     $.get("....", function(data){
-
-    //         $('.div').html(data.loquesea);
-    //         addAEvent();
-    //     });
-
-    // }); -->
-
-
-
-
-
-
-    // Para crear producto
+    // Para productos
     /****************************************************************************************************/
     /** propone el valor sugerido al 40% */
     $('#precio').on('change', function () {
@@ -88,7 +55,6 @@ $(document).ready(function () {
 
     /** oculta o muestra los divs de talles */
     $('input[type=radio][name="rb_talle"]').change(function () {
-        console.log("click rbd");
         $('div#talles-calzado').hide();
         $('div#talles-ropa').hide();
         if (this.value == 'calzado') {
@@ -114,10 +80,6 @@ $(document).ready(function () {
         }
     });
 
-    /** 
-     * TODO validar que no se envien talles iguales en varias filas
-     * al apretar submit debe verificar que si el radio button esta presionado valide talle unico
-    */
 
 });
 

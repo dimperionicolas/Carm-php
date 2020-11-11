@@ -36,7 +36,7 @@ if ($_POST['registro'] == 'nuevo') {
             'respuesta' => 'Error: ' . $th->getMessage()
         );
     }
-    echo json_encode($response);
+    die(json_encode($response));
 }
 
 //editar/actualizar vendedor
@@ -62,8 +62,7 @@ if ($_POST['registro'] == 'actualizar') {
     } catch (Exception $th) {
         echo 'Error: ' . $th->getMessage();
     }
-    // TODO por que lo pone como die(json_encode($response); y le funciona?
-    echo json_encode($response);
+    die(json_encode($response));
 }
 
 

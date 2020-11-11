@@ -20,13 +20,13 @@
     <div class="card">
 
       <div class="card-header">
-        <h2 class="card-title">Crear producto <small></small></h2>
+        <h2 class="card-title">Nueva compra <small></small></h2>
       </div>
 
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
 
-          <form role="form" name="guardar-registro" id="guardar-registro" method="POST" action="modelo-producto.php">
+          <form role="form" name="guardar-registro" id="guardar-registro" method="POST" action="modelo-compra.php">
 
             <div class="card-body">
               <div class="row">
@@ -74,7 +74,7 @@
                   <!-- select Precio y sugerido-->
                   <div class="form-row">
                     <div class="form-group col-sm-6">
-                      <label for="precio">Precio: </label>
+                      <label for="precio">Precio <small>unidad</small>: </label>
                       <input type="number" class="form-control" id="precio" step="0.02" name="precio" placeholder="Costo de compra">
                     </div>
                     <div class="form-group col-sm-6">
@@ -92,25 +92,21 @@
                   <!-- Cantidad stock -->
                   <div class="form-group">
                     <label for="cantidad">Cantidad: </label>
-                    <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingresar un cantidad">
+                    <input type="number" class="tabla-compra form-control" id="cantidad" name="cantidad" placeholder="Ingresar un cantidad">
                   </div>
 
                   <!-- Radio buttons tipo talles-->
-                  <!-- TODO css padding left para div y sacar $nbsp; -->
                   <div class="form-group">
-                    <div class="custom-control custom-radio custom-control-inline">
-                      &nbsp;
-                      &nbsp;
-                      &nbsp;
-                      <input type="radio" id="calzado" name="rb_talle" value="calzado" class="custom-control-input">
+                    <div class="custom-control custom-radio custom-control-inline ml-3">
+                      <input type="radio" id="calzado" name="rb_talle" value="calzado" class="radio-detalle custom-control-input">
                       <label class="custom-control-label" for="calzado">Calzado</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="ropa" name="rb_talle" value="ropa" class="custom-control-input">
+                      <input type="radio" id="ropa" name="rb_talle" value="ropa" class="radio-detalle custom-control-input">
                       <label class="custom-control-label" for="ropa">Ropa</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="indeterminado" name="rb_talle" value="indeterminado" class="custom-control-input" checked>
+                      <input type="radio" id="indeterminado" name="rb_talle" value="indeterminado" class="radio-detalle custom-control-input" checked>
                       <label class="custom-control-label" for="indeterminado">No detallar</label>
                     </div>
                   </div>
@@ -118,7 +114,7 @@
                   <!-- div de talles calzado -->
                   <div class="form-group text-center" id="talles-calzado" style="display: none;">
                     <label>Talles<small class="text-bold">&nbsp;(Ingresar talle y cantidad)</small>: </label>
-                    <table id="t-calzado" class="table table-bordered table-sm table-striped table-hover table-responsive-sm col-sm-12">
+                    <table id="t-calzado" class="tabla-compra table table-bordered table-sm table-striped table-hover table-responsive-sm col-sm-12">
                       <thead>
                         <tr>
                           <th scope="col">Talle</th>
@@ -144,7 +140,7 @@
                   <div class="form-group" id="talles-ropa" style="display: none;">
                     <div class="form-group text-center">
                       <label>Talles<small class="text-bold">&nbsp;(Ingresar talle y cantidad)</small>: </label>
-                      <table id="t-ropa" class="table table-bordered table-striped table-sm table-hover table-responsive-sm ">
+                      <table id="t-ropa" class="tabla-compra table table-bordered table-striped table-sm table-hover table-responsive-sm ">
                         <thead>
                           <tr>
                             <th scope="col">Talle</th>
@@ -195,8 +191,7 @@
               <!-- Submit -->
               <div class="card-footer text-right">
                 <input type="hidden" name="registro" value="nuevo">
-                <!--TODO id="crear_cliente" para agregar validaciones en app.js-->
-                <button type="submit" class="btn btn-primary col-sm-12" id="crear_producto">Agregar</button>
+                <button type="submit" class="btn btn-primary col-sm-12" disabled title="La cantidad y el detalle debe coincidir y ser mayor a cero" id="crear_producto" >Agregar</button>
               </div>
             </div>
 
